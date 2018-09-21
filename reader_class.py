@@ -22,6 +22,7 @@ class Reader:
         i = 0
         for unit in data:
             review = unit['reviewText'].lower()
+            #Add spellchek here
             review = nlp(review)
             if i % 100 == 0:
                 print(i)
