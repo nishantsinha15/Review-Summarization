@@ -5,6 +5,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 start_time = 0
 
 
+def test():
+    s1 = "The car is driven on road"
+    s2 = "The truck is driven on highway"
+
+    vectorizer = TfidfVectorizer()
+    response = vectorizer.fit_transform([s1, s2])
+    print(vectorizer.vocabulary_)
+    print(response)
+
+
 def start_timer():
     global start_time
     start_time = time.time()
@@ -29,9 +39,26 @@ def get_data_ratings(dataset):
     a = ['' for i in range(6)]
     start_timer()
     for unit in dataset:
-        a[int(unit['overall'])].append(unit['reviewText'])
+        a[int(unit['overall'])] += ' ' + (unit['reviewText'])
     end_timer()
-    print("Time Taken")
+    for i in a:
+        print("Length of ", i, "th = ", len(i))
+    return a
 
-read_file()
-get_data_ratings()
+
+def get_tfidf(dataset = ['road is sexy', 'road is uneven', 'road is sexy', 'road is black']):
+    vectorizer = TfidfVectorizer()
+    response = vectorizer.fit_transform(dataset)
+    print(vectorizer.vocabulary_)
+    print(response)
+
+
+
+def main():
+    dataset = read_file()
+    dataset = get_data_ratings(dataset)
+    # get_tfidf(dataset)
+
+
+# main()
+get_tfidf()
