@@ -35,6 +35,7 @@ class Reader:
     def read(self):
         data = self.read_file()
         return self.pre_process(data)
+    
 
 start = time.time()
 read =  Reader()
